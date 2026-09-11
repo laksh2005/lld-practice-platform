@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LLD Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1.5" y="1.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="11.5" y="1.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="6.5" y="11.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 8.5V10a1 1 0 0 0 1 1h1.5M15 8.5V10a1 1 0 0 0-1 1h-1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="brand-name">LLD Practice</span>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-view="practice">Practice</button>
+      <button class="tab" data-view="history">History</button>
+      <span class="tab-indicator" id="tab-indicator"></span>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <!-- PRACTICE VIEW -->
+    <section id="view-practice" class="view active">
+      <aside class="problem-list" id="problem-list">
+        <div class="panel-label">Problems</div>
+        <div id="problems"></div>
+      </aside>
+
+      <section class="workbench" id="workbench">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.6"/>
+              <rect x="22" y="4" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.6"/>
+              <rect x="13" y="22" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <p class="empty-title">Pick a problem to start</p>
+          <p class="empty-body">You will get clear requirements, a place to write your design, and feedback split between instant checks and reasoned review.</p>
+        </div>
+
+        <div class="problem-view hidden" id="problem-view">
+          <div class="problem-header">
+            <div>
+              <h1 id="problem-title"></h1>
+              <span class="difficulty" id="problem-difficulty"></span>
+            </div>
+            <button class="btn btn-ghost" id="new-attempt-btn">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              New attempt
+            </button>
+          </div>
+          <p class="problem-summary" id="problem-summary"></p>
+          <ul class="requirements" id="problem-requirements"></ul>
+
+          <div class="workspace">
+            <div class="workspace-col">
+              <label class="field-label" for="writeup">Design write-up</label>
+              <textarea id="writeup" placeholder="Describe your classes, their responsibilities, and how they relate. Mention how your design would handle the follow-up requirement too."></textarea>
+
+              <label class="field-label" for="code">Code (optional)</label>
+              <textarea id="code" class="code-input" placeholder="// Paste class or interface signatures for extra structural feedback"></textarea>
+
+              <div class="workspace-actions">
+                <span class="status-pill" id="attempt-status">No attempt started</span>
+                <button class="btn btn-primary" id="submit-btn" disabled>
+                  <span class="btn-label">Submit for feedback</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="workspace-col">
+              <label class="field-label">Feedback</label>
+              <div id="feedback-panel" class="feedback-panel">
+                <p class="muted">Feedback for your latest submission will appear here.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="attempt-history">
+            <label class="field-label">Attempts on this problem</label>
+            <div id="attempt-history-list" class="attempt-history-list"></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- HISTORY VIEW -->
+    <section id="view-history" class="view">
+      <div class="history-wrap">
+        <div class="panel-label">All attempts</div>
+        <table class="history-table">
+          <thead>
+            <tr><th>Problem</th><th>Started</th><th>Status</th><th>Submissions</th><th>Latest score</th></tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
